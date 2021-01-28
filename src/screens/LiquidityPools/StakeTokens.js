@@ -46,9 +46,8 @@ import { getPoolStats } from 'utils/liquidityPools';
 import type { Asset } from 'models/Asset';
 import type { TransactionFeeInfo } from 'models/Transaction';
 import type { Dispatch, RootReducerState } from 'reducers/rootReducer';
-import type { LiquidityPoolWithRewards } from 'models/LiquidityPools';
+import type { LiquidityPool, LiquidityPoolWithRewards } from 'models/LiquidityPools';
 import type { LiquidityPoolsReducerState } from 'reducers/liquidityPoolsReducer';
-
 
 type Props = {
   navigation: NavigationScreenProp<*>,
@@ -63,6 +62,10 @@ type Props = {
   ) => void,
   liquidityPoolsReducer: LiquidityPoolsReducerState,
 };
+
+type NavigationProps = {|
+  pool: LiquidityPool,
+|};
 
 const MainContainer = styled.View`
   padding: 24px 20px;
@@ -92,7 +95,7 @@ const StakeTokensScreen = ({
     resetEstimateTransaction();
   }, []);
 
-  const { pool } = navigation.state.params;
+  const { pool }: NavigationProps = navigation.state.params;
   const poolStats = getPoolStats(pool, liquidityPoolsReducer);
   const assetData = pool.poolTokenData;
   const [assetValue, setAssetValue] = useState('');
