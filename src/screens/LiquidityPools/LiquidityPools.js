@@ -36,6 +36,7 @@ import RetryGraphQueryBox from 'components/RetryGraphQueryBox';
 
 import { formatAmount, formatFiat, formatBigFiatAmount, formatBigAmount } from 'utils/common';
 import { convertUSDToFiat } from 'utils/assets';
+import { getImageUrl } from 'utils/images';
 import { getPoolStats } from 'utils/liquidityPools';
 import { getThemeColors } from 'utils/themes';
 
@@ -257,7 +258,7 @@ const LiquidityPoolsScreen = ({
         <ListItemWithImage
           label={pool.name}
           subtext={t('tokenValue', { token: pool.poolTokenData.symbol, value: formatAmount(balance) })}
-          itemImageUrl={`${getEnv().SDK_PROVIDER}/${pool.iconUrl}?size=3`}
+          itemImageUrl={getImageUrl(pool.iconUrl, 3)}
           customAddon={(
             <View style={{ alignItems: 'flex-end' }}>
               <BaseText big>{balanceInFiat}</BaseText>

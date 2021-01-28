@@ -18,6 +18,7 @@
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
+import { getEnv } from 'configs/envConfig';
 import type { Theme } from 'models/Theme';
 import { getThemeType } from './themes';
 
@@ -176,4 +177,9 @@ export const staticImages = {
 
 export const isSvgImage = (uri: ?string) => {
   return uri && uri.endsWith('.svg');
+};
+
+export const getImageUrl = (relativeUrl: ?string, size: number) => {
+  if (!relativeUrl) return undefined;
+  return `${getEnv().SDK_PROVIDER}/${relativeUrl}?size=${size}`;
 };

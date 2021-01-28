@@ -31,7 +31,7 @@ export type LiquidityPoolBase = {
     symbol: string,
     proportion: number
   }[],
-  iconUrl: string,
+  iconUrl?: string,
   poolTokenData: {
     name: string,
     symbol: string,
