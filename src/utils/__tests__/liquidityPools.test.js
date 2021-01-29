@@ -51,12 +51,14 @@ const unipoolPool = {
 
 const liquidityPoolsReducerMock = {
   unipoolData: {
+    // $FlowFixMe: flow update to 0.122
     [unipoolPool.unipoolAddress]: {
       stakedAmount: 10,
       earnedAmount: 1000,
     },
   },
   poolsData: {
+    // $FlowFixMe: flow update to 0.122
     [unipoolPool.uniswapPairAddress]: {
       pair: {
         id: [unipoolPool.uniswapPairAddress],
@@ -120,7 +122,6 @@ describe('Liquidity pools utils', () => {
       historyDates[1509367442000] = new Date(1509367442 * 1000);
       historyDates[1609367442000] = new Date(1609367442 * 1000);
       const now = new Date();
-
 
       const spy = jest
         .spyOn(global, 'Date')
