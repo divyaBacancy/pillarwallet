@@ -19,7 +19,7 @@
 */
 
 // Selectors
-import { useRootSelector } from 'selectors';
+import { useRootSelector, activeAccountAddressSelector } from 'selectors';
 import {
   walletBalanceSelector,
   depositsBalanceSelector,
@@ -44,6 +44,8 @@ export const useTotalBalance = (): BalanceInfo => {
 };
 
 export const useWalletInfo = (): WalletInfo => {
+  const accountAddress = useRootSelector(activeAccountAddressSelector);
+
   const walletBalance = useRootSelector(walletBalanceSelector);
   const depositsBalance = useRootSelector(depositsBalanceSelector);
   const investmentsBalance = useRootSelector(investmentsBalanceSelector);
@@ -54,6 +56,7 @@ export const useWalletInfo = (): WalletInfo => {
 
   return {
     ethereum: {
+      walletAddress: accountAddress,
       wallet: {
         balanceInFiat: walletBalance,
       },

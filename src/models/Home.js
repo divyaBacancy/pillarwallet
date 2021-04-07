@@ -27,6 +27,7 @@ export type WalletInfo = {|
   polygon?: ChainInfo,
 |};
 export type ChainInfo = {|
+  walletAddress?: string,
   wallet?: BalanceInfo,
   deposits?: BalanceInfo,
   investments?: BalanceInfo,
