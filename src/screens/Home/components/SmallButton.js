@@ -19,48 +19,49 @@
 */
 
 import * as React from 'react';
-import { Text as RNText, StyleSheet } from 'react-native';
+import styled from 'styled-components/native';
+
+// Components
+import Text from 'components/modern/Text';
 
 // Utils
 import { useThemeColors } from 'utils/themes';
-import { appFont, objectFontStyles } from 'utils/variables';
 
 // Types
-import type { TextProps, TextStyleProp } from 'utils/types/react-native';
-import type { ThemeColors } from 'models/Theme';
+import type { ViewStyleProp } from 'utils/types/react-native';
 
-
-type Props = {|
-  ...TextProps,
-  variant?: $Keys<typeof objectFontStyles>,
-  color?: string,
+export type Props = {|
+  title: string,
+  onPress?: () => mixed,
+  active?: boolean,
+  style?: ViewStyleProp,
 |};
 
-function Text({
-  variant,
-  color,
-  style,
-  ...rest
-}: Props) {
+function IconButton({ title, active, onPress }: Props) {
   const colors = useThemeColors();
-  const propStyle = StyleSheet.flatten(style);
 
-  const resultStyle = [
-    baseStyle,
-    { color: color ?? colors.basic010 },
-    // Apply `regular` font style only if there is no `font-size` style in order to
-    // avoid automatically setting regular 'line-height'.
-    !propStyle?.fontSize && objectFontStyles.regular,
-    !!variant && objectFontStyles[variant],
-    style,
-  ];
-
-  return <RNText {...rest} style={resultStyle} />;
+  return (
+    <TouchableContainer $active={active} onPress={onPress}>
+      <Text variant="small" color={active ? colors.basic010 : colors.basic030}>
+        {title}
+      </Text>
+    </TouchableContainer>
+  );
 }
 
-const baseStyle: TextStyleProp = {
-  textAlignVertical: 'center',
-  fontFamily: appFont.regular,
-};
+export default IconButton;
 
-export default Text;
+const TouchableContainer = styled.TouchableOpacity`
+  align-items: center;
+  min-width: 36px;
+  padding: 9px 6px;
+  border-radius: 4px;
+  border-width: 1px;
+  border-color: transparent;
+  ${({ $active, theme }) =>
+    !!$active &&
+    `
+    background-color: ${theme.colors.backgroundSecondary};
+    border-color: ${theme.colors.basic060};
+  `}
+`;

@@ -32,6 +32,7 @@ import { useRootSelector, useFiatCurrency, activeAccountAddressSelector } from '
 
 // Utils
 import { formatFiatValue, formatFiatProfit } from 'utils/format';
+import { useThemeColors } from 'utils/themes';
 import { spacing } from 'utils/variables';
 
 // Types
@@ -57,6 +58,8 @@ function BalanceSection({ balance }: Props) {
     Modal.open(() => <AddFundsModal receiveAddress={accountAddress} />);
   }, [accountAddress]);
 
+  const colors = useThemeColors();
+
   return (
     <Container>
       <FirstColumn>
@@ -65,8 +68,8 @@ function BalanceSection({ balance }: Props) {
         </BalanceText>
         {!!formattedPerformance && (
           <ProfitContainer>
-            <ProfitLabel color="secondaryText">{t('lastWeek')}</ProfitLabel>
-            <ProfitValue color="positive">{formattedPerformance}</ProfitValue>
+            <ProfitLabel color={colors.secondaryText}>{t('lastWeek')}</ProfitLabel>
+            <ProfitValue color={colors.positive}>{formattedPerformance}</ProfitValue>
           </ProfitContainer>
         )}
       </FirstColumn>
