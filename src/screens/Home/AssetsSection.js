@@ -50,7 +50,6 @@ type Props = {|
 |};
 
 function AssetsSection({ chainSummaries, chainBalances, showSideChains }: Props) {
-  console.log("AAA", chainSummaries)
   const { t, tRoot } = useTranslationWithPrefix('home.assets');
   const navigation = useNavigation();
 
