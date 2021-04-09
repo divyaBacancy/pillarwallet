@@ -35,11 +35,12 @@ import { MENU } from 'constants/navigationConstants';
 import { useUser } from 'selectors/user';
 
 // Utils
-import { LIST_ITEMS_APPEARANCE } from 'utils/layoutAnimations';
+import { LIST_ITEMS_APPEARANCE, SCALE_XY } from 'utils/layoutAnimations';
 
 // Local
 import BalanceSection from './BalanceSection';
 import AssetsPieChart from './AssetsPieChart';
+import PriceChart from './PriceChart';
 import AssetsSection from './AssetsSection';
 import Controls from './Controls';
 import FloatingActions from './FloatingActions';
@@ -54,6 +55,7 @@ function Home() {
   const navigation = useNavigation();
 
   const [showSideChains, setShowSideChains] = React.useState(false);
+  const [showPriceChart, setShowPriceChart] = React.useState(false);
 
   const chainSummaries = useChainSummaries();
   const chainsBalances = useChainBalances();
@@ -62,6 +64,11 @@ function Home() {
   const handleToggleSideChains = () => {
     LayoutAnimation.configureNext(LIST_ITEMS_APPEARANCE);
     setShowSideChains(!showSideChains);
+  };
+
+  const handleTogglePriceChart = () => {
+    LayoutAnimation.configureNext(SCALE_XY);
+    setShowPriceChart(!showPriceChart);
   };
 
   const categoryBalances = showSideChains ? getChainBalancesTotal(chainsBalances) : chainsBalances.ethereum;
@@ -84,15 +91,16 @@ function Home() {
       <Content contentContainerStyle={{ paddingBottom: FloatingButtons.SCROLL_VIEW_BOTTOM_INSET }}>
         <BalanceSection balance={totalBalance} />
 
-        <AssetsPieChart categoryBalances={categoryBalances} />
+        {showPriceChart ? <PriceChart /> : <AssetsPieChart categoryBalances={categoryBalances} />}
 
-        <Controls showSideChains={showSideChains} onToggleSideChains={handleToggleSideChains} />
-
-        <AssetsSection
-          chainSummaries={chainSummaries}
-          chainBalances={chainsBalances}
+        <Controls
           showSideChains={showSideChains}
+          onToggleSideChains={handleToggleSideChains}
+          showPriceChart={showPriceChart}
+          onTogglePriceChart={handleTogglePriceChart}
         />
+
+        <AssetsSection chainSummaries={chainSummaries} chainBalances={chainsBalances} showSideChains={showSideChains} />
       </Content>
 
       <FloatingActions />

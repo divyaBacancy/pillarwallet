@@ -76,6 +76,8 @@ export const lightThemeColorsOld = {
   poolTogetherPink: '#e51fff',
   toastCloseIcon: '#ededed',
   graphPrimaryColor: '#a945ff',
+
+  backgroundSecondary: lightThemeColors.basic050,
   checkMark: lightThemeColors.primaryAccent130,
   checkBoxField: '#e0eeff',
   pieChartCenter: lightThemeColors.basic070,
@@ -125,6 +127,8 @@ export const darkThemeColorsOld = {
   poolTogetherPink: '#e51fff',
   toastCloseIcon: '#ebf0f5',
   graphPrimaryColor: '#a945ff',
+
+  backgroundSecondary: darkThemeColors.basic050,
   checkMark: darkThemeColors.primaryAccent140,
   checkBoxField: darkThemeColors.basic090,
   pieChartCenter: darkThemeColors.basic050,

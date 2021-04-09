@@ -20,59 +20,36 @@
 
 import * as React from 'react';
 import styled from 'styled-components/native';
-import { useTranslationWithPrefix } from 'translations/translate';
 
-// Components
-import { Spacing } from 'components/Layout';
-import Switcher from 'components/Switcher';
+//
 import Text from 'components/modern/Text';
 
 // Utils
-import { fontStyles, spacing } from 'utils/variables';
+import { BigNumber } from 'utils/common';
+import { formatPercentValue } from 'utils/format';
+import { useThemeColors } from 'utils/themes';
+import { fontSizes } from 'utils/variables';
+import { useAssetCategoriesConfig } from 'utils/uiConfig';
 
-// Local
-import IconButton from './components/IconButton';
+// Types
+import type { CategoryBalances } from 'models/Home';
 
 type Props = {|
-  showSideChains: boolean,
-  onToggleSideChains: (boolean) => mixed,
-
-  showPriceChart: boolean,
-  onTogglePriceChart: (boolean) => mixed,
 |};
 
-function Controls({
-  showSideChains,
-  onToggleSideChains,
-  showPriceChart,
-  onTogglePriceChart,
-}: Props) {
-  const { t } = useTranslationWithPrefix('home.controls');
-
+function PriceChart(props: Props) {
   return (
     <Container>
-      <SwitchLabel>{t('sideChains')}</SwitchLabel>
-      <Switcher isOn={showSideChains} onToggle={onToggleSideChains} />
-
-      <Spacing flex={1} />
-
-      <IconButton
-        iconName={showPriceChart ? 'line-chart' : 'pie-chart'}
-        onPress={() => onTogglePriceChart(!showPriceChart)}
-      />
+      <Text>Price chart</Text>
     </Container>
   );
 }
 
-export default Controls;
+export default PriceChart;
+
 
 const Container = styled.View`
-  flex-direction: row;
+  justify-content: center;
   align-items: center;
-  margin: ${spacing.large}px 0 ${spacing.small}px;
-`;
-
-const SwitchLabel = styled(Text)`
-  ${fontStyles.small};
-  margin-right: ${spacing.small}px;
+  height: 320px;
 `;
