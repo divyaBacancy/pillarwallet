@@ -724,8 +724,8 @@ jobs:
       - run:
           name: Set tag and publish releases to GitHub
           command: |
-            chmod +x setReleaseInfo.sh
-            . ./setReleaseInfo.sh
+            chmod +x .circleci/setReleaseInfo.sh
+            .circleci/setReleaseInfo.sh
             TAG_VERSION="$(cat /tmp/workspace/build-num/gh_tag_version.txt)"
             APP_VERSION="$(cat /tmp/workspace/build-num/app_version.txt)"
             echo $SUPPORT_DESCRIPTION > support_description.txt
