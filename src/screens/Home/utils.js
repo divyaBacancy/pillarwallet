@@ -39,8 +39,11 @@ import type {
   ChainBalances,
   CategoryBalances,
   Balance,
+  PriceChartDatum,
 } from 'models/Home';
 
+// Local
+import priceChartData from './mockData.json';
 
 export function useChainSummaries(): ChainSummaries {
   const ethereum = {
@@ -94,4 +97,10 @@ export function getTotalBalances(balances: (?Balance)[]): Balance {
     balanceInFiat: sum(balances.map((b) => b?.balanceInFiat)),
     profitInFiat: sumOrNull(balances.map((b) => b?.profitInFiat)),
   };
+}
+
+export function usePriceChartData(days: ?number): PriceChartDatum {
+  if (!days) return priceChartData;
+
+  return priceChartData.slice(-days);
 }

@@ -82,6 +82,7 @@ export const lightThemeColorsOld = {
   checkBoxField: '#e0eeff',
   pieChartCenter: lightThemeColors.basic070,
   pieChartEmpty: '#f2f2f2',
+  lineChartLine: lightThemeColors.basic000,
 };
 
 // will be removed after transition
@@ -133,6 +134,7 @@ export const darkThemeColorsOld = {
   checkBoxField: darkThemeColors.basic090,
   pieChartCenter: darkThemeColors.basic050,
   pieChartEmpty: darkThemeColors.basic060,
+  lineChartLine: darkThemeColors.primaryAccent130,
 };
 
 export const themedColors = {

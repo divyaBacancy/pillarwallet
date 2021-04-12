@@ -27,6 +27,13 @@ type ChainRecord<T> = {|
   polygon?: T,
 |}
 
+export type AccountSummary = {|
+  walletAddress?: string,
+  collectibleCount?: number,
+  contactCount?: number,
+|};
+
+
 export type ChainBalances = ChainRecord<CategoryBalances>;
 
 export type CategoryBalances = {|
@@ -45,8 +52,7 @@ export type Balance = {|
 
 export type ChainSummaries = ChainRecord<AccountSummary>;
 
-export type AccountSummary = {|
-  walletAddress?: string,
-  collectibleCount?: number,
-  contactCount?: number,
+export type PriceChartDatum = {|
+  timestamp: string, // YYYY-MM-DD
+  balance: number,
 |};
