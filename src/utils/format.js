@@ -21,7 +21,7 @@
 import { BigNumber } from 'bignumber.js';
 import t from 'translations/translate';
 
-import { getCurrencySymbol } from 'utils/common';
+import { getCurrencySymbol, getDecimalPlaces } from 'utils/common';
 
 function wrapBigNumber(value: ?BigNumber | number): ?BigNumber {
   if (value == null) return null;
@@ -157,4 +157,19 @@ export function formatFiatProfit(profit: ?BigNumber, balance: ?BigNumber, curren
   if (formattedProfitInFiat) return formattedProfitInFiat;
 
   return null;
+}
+
+/**
+ * Format token value change with +/- sign.
+ * By defaults outputs 2 decimal places, without stripping zeros.
+ */
+export function formatTokenValueChange(value: ?BigNumber, symbol?: string, options?: FormatValueOptions) {
+  if (!value || !value.isFinite()) return null;
+
+  const decimalPlaces = getDecimalPlaces(symbol);
+  const formattedValue = formatValue(value.abs(), { decimalPlaces, ...options });
+
+  return value.gte(0)
+    ? t('positiveTokenValue', { value: formattedValue, token: symbol })
+    : t('negativeTokenValue', { value: formattedValue, token: symbol });
 }
